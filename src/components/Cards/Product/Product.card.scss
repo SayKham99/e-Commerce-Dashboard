@@ -1,0 +1,78 @@
+.product__card {
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(15px);
+  max-width: 350px;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+
+  &-header {
+    max-width: 100%;
+
+    &--image {
+      max-width: 100%;
+    }
+  }
+
+  &-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+
+    .product__name {
+
+    }
+
+    .product__sale {
+      margin-top: -10px;
+    }
+
+    .product__price {
+      color: black;
+      font-size: 18px;
+
+      b {
+        color: white;
+      }
+    }
+
+    .product__tools {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      &-sold, &-rating {
+        color: black;
+
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    .product__btn {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .edit {
+      background-color: rgba(0, 128, 0, 1);
+    }
+    .delete{
+      background-color: red;
+    }
+  }
+}

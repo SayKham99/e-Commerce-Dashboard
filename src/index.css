@@ -1,0 +1,24 @@
+@import-normalize;
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  transition: all .3s ease-in-out;
+  font-family: 'El Messiri', sans-serif;
+}
+
+body{
+  background: darkcyan;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  color: white;
+  object-fit: contain;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}

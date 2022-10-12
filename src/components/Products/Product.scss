@@ -1,0 +1,16 @@
+.product__container {
+  display: flex;
+  flex-direction: column;
+
+  &-title{
+    margin-bottom: 20px;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+}
