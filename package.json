@@ -1,17 +1,20 @@
 {
-  "name": "vite-project",
-  "version": "0.1.0",
+  "name": "dashboard",
+  "version": "0.1.1",
   "homepage": "https://localhost:3000/dashboard",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "compressorjs": "^1.1.1",
+    "firebase": "^9.12.1",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -37,5 +40,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Vodiy Polimer Dashboard",
+  "main": "index.js",
+  "author": "SayKham99 <x5292621@gmail.com>",
+  "license": "MIT"
 }
