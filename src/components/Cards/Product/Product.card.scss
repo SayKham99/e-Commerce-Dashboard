@@ -11,6 +11,8 @@
 
     &--image {
       max-width: 100%;
+      min-height: 200px;
+      border-radius: 10px;
     }
   }
 
@@ -60,6 +62,7 @@
     gap: 15px;
 
     .product__btn {
+      cursor: pointer;
       padding: 5px 10px;
       border-radius: 5px;
       border: none;

@@ -1,15 +1,15 @@
-import React from 'react';
-import './Product.scss'
+import React, {useState, useEffect} from 'react';
+import './Products.scss'
 import ProductCard from "../Cards/Product/Product.card";
+import {onValue, ref, remove} from "firebase/database";
+import {db} from "../../firebase";
 
-function Product() {
-    /*const [product, setProduct] = useState([]);
+function Products() {
+    const [products, setProducts] = useState([]);
     const [file, setFile] = useState([]);
     const [images, setImages] = useState([]);
     const [Add, setAdd] = useState(false);
     const [EDIT, setEDIT] = useState(false);
-    const [Data, setData] = useState([]);
-    const [categories, setCategories] = useState([]);
     const [edit, setEdit] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
@@ -20,23 +20,13 @@ function Product() {
     //read
     useEffect(() => {
         let data = [];
-        let category = [];
         const Test = ref(db, 'products/');
         onValue(Test, (snapshot) => {
             data = [];
             snapshot.forEach(function (productSnapshot) {
                 let userData = productSnapshot.val();
                 data.push(userData)
-                setData(data)
-            })
-        })
-        const categ = ref(db, 'categories/');
-        onValue(categ, (snapshot) => {
-            data = [];
-            snapshot.forEach(function (productSnapshot) {
-                let userData = productSnapshot.val();
-                category.push(userData)
-                setCategories(category)
+                setProducts(data)
             })
         })
     }, []);
@@ -51,41 +41,18 @@ function Product() {
             snapshot.forEach(function (productSnapshot) {
                 let userData = productSnapshot.val();
                 console.log(userData);
-
             })
         })
     }
 
-    console.log(product);
-
-    //delete
-    const Delete = (e) => {
-        remove(ref(db, `products/${e}`))
-            .then(() => {
-                alert('deleted')
-            })
-            .catch(() => {
-                alert('not deleted')
-            })
-    }*/
-
-
     return (<section className='product__container'>
         <h1 className='product__container-title'>Product</h1>
         <div className='product__container-wrapper'>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
+            {products.map(product => (
+                <ProductCard data={product}/>
+            ))}
         </div>
     </section>);
 }
 
-export default Product;
+export default Products;

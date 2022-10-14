@@ -1,0 +1,66 @@
+.users {
+  display: flex;
+  flex-direction: column;
+  min-width: 760px;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__table {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(15px);
+    padding: 10px;
+
+    &-header, &-info {
+      color: black;
+      font-size: 18px;
+      height: 35px;
+      border-radius: 10px 10px 0 0;
+      text-align: center;
+    }
+
+    &-info {
+      color: white;
+      height: 45px;
+      padding: 5px 10px;
+
+      &:hover {
+        background-color: lightgray;
+      }
+
+      &--btns {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        .button {
+          cursor: pointer;
+          min-width: 50px;
+          height: 35px;
+          padding: 5px 8px;
+          border: none;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .view {
+          background-color: #5f65ff;
+        }
+
+        .edit {
+          background-color: green;
+        }
+
+        .delete {
+          background-color: red;
+        }
+      }
+    }
+  }
+}

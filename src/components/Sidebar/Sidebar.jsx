@@ -1,16 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './sidebar.scss'
 import {NavLink, Outlet} from "react-router-dom";
-import {ref, set} from "firebase/database";
-import {ref as storageRef, uploadBytes, getDownloadURL} from "firebase/storage";
-import {db} from "../../firebase";
-import {storage} from "../../firebase";
-import {v4 as uuid} from 'uuid'
-import Compressor from 'compressorjs';
 import CreateModal from "../Modals/Create.modal/Create.modal";
+import {onValue, ref} from "firebase/database";
+import {db} from "../../firebase";
 
 function Sidebar() {
     const [open, setOpen] = useState(false)
+    /*const [categories, setCategories] = useState([])
+    //read category
+    useEffect(() => {
+        let category = [];
+        let data = [];
+        const categ = ref(db, 'categories/');
+        onValue(categ, (snapshot) => {
+            data = [];
+            snapshot.forEach(function (productSnapshot) {
+                let userData = productSnapshot.val();
+                category.push(userData)
+                setCategories(category)
+            })
+        })
+    }, [])*/
+
     return (<section className='container'>
         <div className='sidebar'>
             <div className='sidebar__top'>

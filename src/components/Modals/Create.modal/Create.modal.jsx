@@ -4,10 +4,10 @@ import {getDownloadURL, ref as storageRef, uploadBytes} from "firebase/storage";
 import {db, storage} from "../../../firebase";
 import {v4 as uuid} from "uuid";
 import Compressor from "compressorjs";
-import {ref, set} from "firebase/database";
+import {onValue, ref, set} from "firebase/database";
+
 
 function CreateModal({open, setOpen}) {
-    console.log(open)
     const [file, setFile] = useState([]);
     const [images, setImages] = useState([]);
     const [price, setPrice] = useState('');
@@ -15,6 +15,23 @@ function CreateModal({open, setOpen}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [discount, setDiscount] = useState('');
+    const [categories, setCategories] = useState([]);
+
+    //read category
+    useEffect(() => {
+        let category = [];
+        let data = [];
+        const categ = ref(db, 'categories/');
+        onValue(categ, (snapshot) => {
+            data = [];
+            snapshot.forEach(function (productSnapshot) {
+                let userData = productSnapshot.val();
+                category.push(userData)
+                setCategories(category)
+            })
+        })
+    }, [])
+
     //upload
     let count = 0
     const urls = []
@@ -24,7 +41,7 @@ function CreateModal({open, setOpen}) {
             new Compressor(file[i], {
                 quality: 0.2, success(result) {
                     uploadBytes(url, result).then((async () => {
-                        let downloadURL = (await getDownloadURL(url))
+                        let downloadURL = (await getDownloadURL(url));
                         urls.push({
                             image_id: uuid().toString(),
                             image_url: downloadURL,
@@ -46,7 +63,8 @@ function CreateModal({open, setOpen}) {
 
     //create
     const date = new Date()
-    const Create = () => {
+    const Create = (e) => {
+        e.preventDefault();
         const id = uuid()
         set(ref(db, `products/${id}`), {
             product_id: id.toString(),
@@ -62,6 +80,7 @@ function CreateModal({open, setOpen}) {
             product_image: images,
         });
     }
+
     return (<div style={{display: open === true ? 'flex' : 'none'}} className='create__modal'>
         <div onClick={() => setOpen(false)} className='create__modal-exit'>
             <div className='create__modal-exit--btn'></div>
@@ -77,6 +96,8 @@ function CreateModal({open, setOpen}) {
                 <select className='inputs__wrapper-select' id='category' name="categories" value={category}
                         onChange={e => setCategory(e.target.value)}>
                     <option value="">Select Category</option>
+                    {categories.map(category => (
+                        <option value={category.category_id}>{category.category_name}</option>))}
                 </select>
             </div>
             <div className='inputs__wrapper'>
@@ -91,22 +112,21 @@ function CreateModal({open, setOpen}) {
             </div>
             <div className='inputs__wrapper'>
                 <label htmlFor="description" className='inputs__wrapper-label'>Tavsif</label>
-                <textarea className='inputs__wrapper-area' id="description" cols="25" rows="5" maxLength={100}
+                <textarea className='inputs__wrapper-area' id="description" cols="25" rows="5" maxLength={400}
                           onChange={e => setDescription(e.target.value)}></textarea>
             </div>
             <div className='inputs__wrapper'>
                 <label htmlFor="imege" className='inputs__wrapper-label'>Select Image</label>
                 <input type="file" className='inputs__wrapper-file' multiple onChange={(e) => setFile(e.target.files)}/>
             </div>
-            <div className='inputs__images'>
+            <div style={{display: images.length === 0 ? 'none' : "flex"}} className='inputs__images'>
                 {images.map(img => (
-                    <img className='inputs__images-image' id={img.image_id} src={img.image_url} alt=""/>
-                ))}
+                    <img className='inputs__images-image' id={img.image_id} src={img.image_url} alt=""/>))}
             </div>
             <div className='inputs__wrapper'>
                 <input type="submit" className='inputs__wrapper-submit' onClick={e => {
-                    e.preventDefault();
                     setOpen(false);
+                    Create(e);
                 }}/>
             </div>
         </div>
